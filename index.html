@@ -3,19 +3,563 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi primera página</title>
+  <title>ZIRENA | Consultoría tecnológica</title>
+  <meta name="description" content="ZIRENA es una consultoría tecnológica para pymes, emprendedoras y profesionales independientes. Análisis de datos, automatización de procesos e inteligencia artificial aplicada.">
+  <meta name="theme-color" content="#101C2A">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101C2A'/%3E%3Cpath d='M16 48 L32 14 L48 48' fill='none' stroke='%23F4F2ED' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='41' r='4' fill='%2362A6A8'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
-      background-color: #f4f4f4;
+    :root {
+      --azul: #101C2A;
+      --petroleo: #244B5A;
+      --turquesa: #62A6A8;
+      --niebla: #D7D9D5;
+      --marfil: #F4F2ED;
+      --blanco: #FFFFFF;
+      --radio: 14px;
+      --ancho: 1120px;
     }
-    h1 { color: #333; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--azul);
+      background: var(--marfil);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img, svg { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .contenedor { width: 100%; max-width: var(--ancho); margin: 0 auto; padding: 0 24px; }
+
+    :focus-visible { outline: 3px solid var(--turquesa); outline-offset: 3px; border-radius: 4px; }
+
+    /* ---------- Logotipo (provisional, tipográfico) ---------- */
+    .logo {
+      --ls: .32em;
+      font-weight: 500;
+      letter-spacing: var(--ls);
+      margin-right: calc(var(--ls) * -1);
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--marfil);
+      font-size: 1.25rem;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .logo .a { position: relative; display: inline-block; }
+    .logo .a::after {
+      content: "";
+      position: absolute;
+      left: calc(50% - var(--ls) / 2);
+      bottom: .08em;
+      width: .15em; height: .15em;
+      border-radius: 50%;
+      background: var(--turquesa);
+      transform: translateX(-50%);
+    }
+    .logo-claro { color: var(--azul); }
+
+    /* ---------- Navegación ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(16, 28, 42, .96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(98, 166, 168, .2);
+    }
+    .nav-in { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--niebla); text-decoration: none; font-size: .86rem; font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--turquesa); }
+    .nav-links .btn-nav {
+      background: var(--turquesa); color: var(--azul);
+      padding: 9px 20px; border-radius: 999px; font-weight: 600;
+    }
+    .nav-links .btn-nav:hover { color: var(--azul); background: #7bbbbd; }
+
+    .menu-btn {
+      display: none; background: none; border: 1px solid rgba(215, 217, 213, .35);
+      color: var(--marfil); border-radius: 8px; padding: 8px 12px;
+      font: 500 .85rem 'Montserrat', sans-serif; cursor: pointer;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--azul) 0%, #14283a 55%, var(--petroleo) 130%);
+      color: var(--marfil);
+      padding: 96px 0 104px;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(98, 166, 168, .09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(98, 166, 168, .09) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: linear-gradient(to left, #000 10%, transparent 80%);
+              mask-image: linear-gradient(to left, #000 10%, transparent 80%);
+    }
+    .hero::after {
+      content: ""; position: absolute; right: -200px; top: -220px;
+      width: 640px; height: 640px; border-radius: 50%;
+      border: 1px solid rgba(98, 166, 168, .35);
+      box-shadow: 0 0 0 60px rgba(98, 166, 168, .04), 0 0 0 120px rgba(98, 166, 168, .03);
+    }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
+
+    .etiqueta {
+      display: inline-block; font-size: .75rem; font-weight: 600;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--turquesa);
+      margin-bottom: 20px;
+    }
+    h1 { font-weight: 600; font-size: clamp(2.2rem, 5vw, 3.7rem); line-height: 1.12; letter-spacing: -.01em; }
+    h1 em { font-style: normal; color: var(--turquesa); }
+    .hero p.lead { margin-top: 24px; max-width: 520px; font-size: 1.08rem; color: var(--niebla); }
+    .hero-acciones { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; }
+
+    .btn {
+      display: inline-block; text-decoration: none; font-weight: 600; font-size: .95rem;
+      padding: 14px 28px; border-radius: 999px; border: 1.5px solid transparent;
+      transition: transform .2s, background .2s, color .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primario { background: var(--turquesa); color: var(--azul); }
+    .btn-primario:hover { background: #7bbbbd; }
+    .btn-secundario { border-color: rgba(215, 217, 213, .45); color: var(--marfil); }
+    .btn-secundario:hover { border-color: var(--turquesa); color: var(--turquesa); }
+
+    .hero-visual {
+      border: 1px solid rgba(98, 166, 168, .3); border-radius: 20px;
+      background: rgba(16, 28, 42, .55); padding: 22px;
+    }
+    .hero-visual .pie { margin-top: 12px; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--niebla); display: flex; justify-content: space-between; }
+    .hero-visual .pie span:last-child { color: var(--turquesa); }
+
+    /* ---------- Secciones ---------- */
+    section { padding: 92px 0; }
+    .seccion-claro { background: var(--marfil); }
+    .seccion-blanca { background: var(--blanco); }
+    .seccion-oscura { background: var(--azul); color: var(--marfil); }
+
+    .encabezado { max-width: 640px; margin-bottom: 52px; }
+    .encabezado .etiqueta { color: var(--petroleo); }
+    .seccion-oscura .encabezado .etiqueta { color: var(--turquesa); }
+    h2 { font-weight: 600; font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.2; letter-spacing: -.005em; }
+    .encabezado p { margin-top: 16px; color: var(--petroleo); font-size: 1.02rem; }
+    .seccion-oscura .encabezado p { color: var(--niebla); }
+
+    /* Transformación */
+    .transformacion { background: var(--blanco); padding: 56px 0; border-bottom: 1px solid var(--niebla); }
+    .trans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .trans-item { padding-left: 18px; border-left: 2px solid var(--turquesa); }
+    .trans-item small { display: block; font-size: .78rem; color: var(--petroleo); text-decoration: line-through; text-decoration-color: rgba(36, 75, 90, .4); }
+    .trans-item strong { display: block; margin-top: 4px; font-weight: 600; font-size: 1.05rem; }
+
+    /* Servicios */
+    .servicios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .tarjeta {
+      background: var(--marfil); border: 1px solid var(--niebla); border-radius: var(--radio);
+      padding: 34px 30px; display: flex; flex-direction: column;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+    .tarjeta:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(16, 28, 42, .08); border-color: var(--turquesa); }
+    .num { font-weight: 500; font-size: .85rem; letter-spacing: .2em; color: var(--turquesa); }
+    .tarjeta h3 { font-weight: 600; font-size: 1.3rem; margin: 14px 0 10px; line-height: 1.25; }
+    .tarjeta > p { color: var(--petroleo); font-size: .95rem; }
+    .tarjeta ul { list-style: none; margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--niebla); }
+    .tarjeta li { position: relative; padding-left: 20px; font-size: .9rem; margin-bottom: 9px; }
+    .tarjeta li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; border-radius: 50%; background: var(--turquesa); }
+    .tarjeta .herramientas { margin-top: auto; padding-top: 20px; font-size: .78rem; letter-spacing: .06em; color: var(--petroleo); }
+
+    /* Soluciones */
+    .soluciones { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .solucion { background: var(--blanco); border-left: 3px solid var(--turquesa); border-radius: 4px var(--radio) var(--radio) 4px; padding: 26px 28px; }
+    .solucion .situacion { font-weight: 600; font-size: 1.05rem; }
+    .solucion .resultado { margin-top: 8px; color: var(--petroleo); font-size: .93rem; }
+    .solucion .resultado::before { content: "→ "; color: var(--turquesa); font-weight: 600; }
+
+    /* Proyectos */
+    .proyectos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .proyecto { border: 1px dashed rgba(98, 166, 168, .55); border-radius: var(--radio); padding: 30px 28px; background: rgba(36, 75, 90, .25); }
+    .proyecto .estado { display: inline-block; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--turquesa); border: 1px solid rgba(98, 166, 168, .5); border-radius: 999px; padding: 4px 12px; }
+    .proyecto h3 { font-weight: 600; font-size: 1.12rem; margin: 18px 0 10px; line-height: 1.3; }
+    .proyecto p { font-size: .9rem; color: var(--niebla); }
+    .nota-proyectos { margin-top: 28px; font-size: .85rem; color: var(--niebla); opacity: .85; }
+
+    /* Metodología */
+    .pasos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; counter-reset: paso; }
+    .paso { position: relative; padding-top: 26px; border-top: 2px solid var(--niebla); }
+    .paso::before {
+      counter-increment: paso; content: "0" counter(paso);
+      position: absolute; top: -13px; left: 0; background: var(--marfil);
+      padding-right: 12px; font-weight: 600; font-size: .85rem; letter-spacing: .15em; color: var(--turquesa);
+    }
+    .paso h3 { font-weight: 600; font-size: 1.1rem; margin-bottom: 8px; }
+    .paso p { font-size: .9rem; color: var(--petroleo); }
+    .principio {
+      margin-top: 56px; padding: 30px 34px; border-radius: var(--radio);
+      background: var(--azul); color: var(--marfil); display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+    }
+    .principio strong { font-weight: 600; font-size: 1.15rem; }
+    .principio span { color: var(--niebla); font-size: .93rem; }
+    .principio .punto { width: 14px; height: 14px; border-radius: 50%; background: var(--turquesa); flex: none; }
+
+    /* Sobre */
+    .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .sobre-texto p { color: var(--petroleo); margin-bottom: 16px; }
+    .valores { display: grid; gap: 16px; }
+    .valor { background: var(--marfil); border-radius: var(--radio); padding: 22px 26px; border: 1px solid var(--niebla); }
+    .valor h3 { font-weight: 600; font-size: 1rem; }
+    .valor p { margin-top: 6px; font-size: .9rem; color: var(--petroleo); }
+
+    /* Contacto */
+    .contacto { text-align: center; position: relative; overflow: hidden; }
+    .contacto::before {
+      content: ""; position: absolute; left: 50%; top: 50%; width: 560px; height: 560px;
+      transform: translate(-50%, -50%); border-radius: 50%;
+      border: 1px solid rgba(98, 166, 168, .25); box-shadow: 0 0 0 70px rgba(98, 166, 168, .04);
+    }
+    .contacto .contenedor { position: relative; z-index: 1; }
+    .contacto h2 { max-width: 640px; margin: 0 auto; }
+    .contacto p { max-width: 520px; margin: 18px auto 0; color: var(--niebla); }
+    .contacto .hero-acciones { justify-content: center; }
+    .contacto small { display: block; margin-top: 26px; color: var(--niebla); opacity: .8; font-size: .85rem; }
+
+    /* Footer */
+    footer { background: #0b141f; color: var(--niebla); padding: 44px 0; }
+    .foot-in { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .foot-in .lema { font-size: .85rem; margin-top: 10px; }
+    .foot-in .legal { font-size: .78rem; opacity: .75; }
+    .foot-desc { margin-top: 8px; font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--turquesa); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 960px) {
+      .hero-grid, .sobre-grid { grid-template-columns: 1fr; }
+      .hero-visual { max-width: 460px; }
+      .servicios, .proyectos { grid-template-columns: 1fr; }
+      .pasos { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
+      .trans-grid { grid-template-columns: 1fr; gap: 22px; }
+    }
+    @media (max-width: 760px) {
+      .menu-btn { display: block; }
+      .nav-links {
+        display: none; position: absolute; top: 68px; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--azul); padding: 12px 24px 24px; border-bottom: 1px solid rgba(98, 166, 168, .2);
+      }
+      .nav-links.abierto { display: flex; }
+      .nav-links li a { display: block; padding: 14px 0; border-bottom: 1px solid rgba(215, 217, 213, .12); }
+      .nav-links .btn-nav { text-align: center; margin-top: 16px; border: none; }
+      .soluciones { grid-template-columns: 1fr; }
+      section { padding: 72px 0; }
+      .hero { padding: 72px 0 80px; }
+      .pasos { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
   </style>
 </head>
 <body>
-  <h1>¡Hola, mundo!</h1>
-  <p>Esta es mi primera página web publicada con Vercel.</p>
+
+  <!-- NAVEGACIÓN -->
+  <header class="nav">
+    <div class="contenedor nav-in">
+      <a href="#inicio" class="logo" aria-label="ZIRENA, inicio">ZIREN<span class="a">A</span></a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menú</button>
+      <ul class="nav-links" id="menu">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#soluciones">Soluciones</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#metodologia">Metodología</a></li>
+        <li><a href="#sobre">Sobre ZIRENA</a></li>
+        <li><a href="#contacto" class="btn-nav">Contacto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. INICIO -->
+    <section class="hero" id="inicio">
+      <div class="contenedor hero-grid">
+        <div>
+          <span class="etiqueta">Consultoría tecnológica</span>
+          <h1>Transformamos la manera de <em>trabajar.</em></h1>
+          <p class="lead">Ayudamos a pymes, emprendedoras y profesionales independientes a ordenar su información, automatizar tareas repetitivas y tomar decisiones con claridad.</p>
+          <div class="hero-acciones">
+            <a href="#servicios" class="btn btn-primario">Conoce nuestros servicios</a>
+            <a href="#contacto" class="btn btn-secundario">Conversemos</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <svg viewBox="0 0 400 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- cuadrícula -->
+            <g stroke="#62A6A8" stroke-opacity=".18">
+              <path d="M0 52H400M0 104H400M0 156H400M0 208H400"/>
+              <path d="M80 0V260M160 0V260M240 0V260M320 0V260"/>
+            </g>
+            <!-- datos dispersos -->
+            <g fill="#D7D9D5" fill-opacity=".55">
+              <circle cx="22" cy="170" r="4"/><circle cx="46" cy="80" r="3"/><circle cx="64" cy="200" r="4"/>
+              <circle cx="92" cy="120" r="3"/><circle cx="110" cy="60" r="4"/><circle cx="128" cy="190" r="3"/>
+            </g>
+            <!-- línea de claridad -->
+            <path d="M150 200 C 190 196, 210 160, 250 140 S 330 80, 380 40" stroke="#62A6A8" stroke-width="3" stroke-linecap="round"/>
+            <g fill="#62A6A8">
+              <circle cx="150" cy="200" r="5"/><circle cx="250" cy="140" r="5"/><circle cx="380" cy="40" r="6"/>
+            </g>
+            <circle cx="380" cy="40" r="14" stroke="#62A6A8" stroke-opacity=".4"/>
+          </svg>
+          <div class="pie"><span>Del desorden</span><span>a la claridad</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRANSFORMACIÓN -->
+    <div class="transformacion">
+      <div class="contenedor trans-grid">
+        <div class="trans-item"><small>Datos dispersos</small><strong>Decisiones fundamentadas</strong></div>
+        <div class="trans-item"><small>Tareas repetitivas</small><strong>Procesos eficientes</strong></div>
+        <div class="trans-item"><small>Información desordenada</small><strong>Claridad para trabajar</strong></div>
+      </div>
+    </div>
+
+    <!-- 2. SERVICIOS -->
+    <section class="seccion-blanca" id="servicios">
+      <div class="contenedor">
+        <div class="encabezado">
+          <span class="etiqueta">Servicios</span>
+          <h2>Tecnología con criterio, no tecnología por moda.</h2>
+          <p>Cada servicio parte de un problema concreto de tu negocio, no de una herramienta de moda.</p>
+        </div>
+
+        <div class="servicios">
+          <article class="tarjeta">
+            <span class="num">01</span>
+            <h3>Convierte tus datos en decisiones</h3>
+            <p>Ordenamos tu información y la convertimos en paneles claros para que veas cómo va tu negocio.</p>
+            <ul>
+              <li>Organización y limpieza de datos</li>
+              <li>Paneles de ventas y resultados</li>
+              <li>Indicadores de desempeño</li>
+              <li>Análisis de tendencias y estacionalidad</li>
+            </ul>
+            <p class="herramientas">Excel · Power Query · Power BI</p>
+          </article>
+
+          <article class="tarjeta">
+            <span class="num">02</span>
+            <h3>Automatiza tareas y recupera tiempo</h3>
+            <p>Conectamos las herramientas que ya usas para que las tareas repetitivas se hagan solas.</p>
+            <ul>
+              <li>Registro automático de clientes y pedidos</li>
+              <li>Notificaciones y seguimiento</li>
+              <li>Informes automáticos</li>
+              <li>Tareas administrativas automatizadas</li>
+            </ul>
+            <p class="herramientas">Make · Zapier · Google Sheets</p>
+          </article>
+
+          <article class="tarjeta">
+            <span class="num">03</span>
+            <h3>Inteligencia artificial con propósito</h3>
+            <p>Aplicamos IA a tareas específicas, siempre con supervisión humana y sin promesas exageradas.</p>
+            <ul>
+              <li>Asistentes para tareas específicas</li>
+              <li>Clasificación de consultas de clientes</li>
+              <li>Generación de respuestas y documentos</li>
+              <li>Extracción y resumen de información</li>
+            </ul>
+            <p class="herramientas">ChatGPT · Claude</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SOLUCIONES PARA NEGOCIOS -->
+    <section class="seccion-claro" id="soluciones">
+      <div class="contenedor">
+        <div class="encabezado">
+          <span class="etiqueta">Soluciones para negocios</span>
+          <h2>¿Te suena familiar alguna de estas situaciones?</h2>
+          <p>Estos son problemas habituales en negocios pequeños y medianos. Se pueden resolver con soluciones simples y bien pensadas.</p>
+        </div>
+
+        <div class="soluciones">
+          <div class="solucion">
+            <p class="situacion">Tengo mis ventas en varias planillas y no sé qué producto me rinde más.</p>
+            <p class="resultado">Un panel que reúne tus datos y te muestra qué se vende, cuándo y cuánto.</p>
+          </div>
+          <div class="solucion">
+            <p class="situacion">Anoto pedidos y clientes a mano, y a veces se me pasan cosas.</p>
+            <p class="resultado">Un registro automático que ordena cada pedido y te avisa del seguimiento.</p>
+          </div>
+          <div class="solucion">
+            <p class="situacion">Cada semana armo el mismo informe copiando y pegando datos.</p>
+            <p class="resultado">Un informe que se actualiza solo y llega listo a tu correo.</p>
+          </div>
+          <div class="solucion">
+            <p class="situacion">Respondo todos los días las mismas consultas de clientes.</p>
+            <p class="resultado">Un asistente con IA que clasifica consultas y propone respuestas, con tu revisión final.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PROYECTOS DEMOSTRATIVOS -->
+    <section class="seccion-oscura" id="proyectos">
+      <div class="contenedor">
+        <div class="encabezado">
+          <span class="etiqueta">Proyectos demostrativos</span>
+          <h2>Ejemplos de lo que podemos construir.</h2>
+          <p>Estamos preparando casos demostrativos con datos de ejemplo para que veas cómo se vería una solución antes de contratarla.</p>
+        </div>
+
+        <div class="proyectos">
+          <article class="proyecto">
+            <span class="estado">En preparación</span>
+            <h3>Panel de ventas para un negocio pequeño</h3>
+            <p>Ventas, productos y tendencias en un solo tablero, hecho en Power BI con datos de ejemplo.</p>
+          </article>
+          <article class="proyecto">
+            <span class="estado">En preparación</span>
+            <h3>Registro automático de pedidos</h3>
+            <p>Del formulario del cliente a una planilla ordenada, con aviso automático, usando Google Sheets y Make.</p>
+          </article>
+          <article class="proyecto">
+            <span class="estado">En preparación</span>
+            <h3>Asistente para consultas frecuentes</h3>
+            <p>Clasificación de consultas y borradores de respuesta con IA, con revisión humana.</p>
+          </article>
+        </div>
+        <p class="nota-proyectos">Los proyectos demostrativos usan información ficticia y no representan clientes reales.</p>
+      </div>
+    </section>
+
+    <!-- 5. METODOLOGÍA -->
+    <section class="seccion-claro" id="metodologia">
+      <div class="contenedor">
+        <div class="encabezado">
+          <span class="etiqueta">Metodología de trabajo</span>
+          <h2>Un proceso claro, de principio a fin.</h2>
+          <p>Sabrás qué se hará, en qué plazos y qué recibirás, antes de empezar.</p>
+        </div>
+
+        <div class="pasos">
+          <div class="paso">
+            <h3>Entendemos tu necesidad</h3>
+            <p>Conversamos sobre tu negocio, tus dificultades y los recursos que tienes.</p>
+          </div>
+          <div class="paso">
+            <h3>Analizamos y proponemos</h3>
+            <p>Identificamos oportunidades y te presentamos una propuesta con alcance, plazos y valor.</p>
+          </div>
+          <div class="paso">
+            <h3>Desarrollamos y ajustamos</h3>
+            <p>Construimos la solución, la revisamos contigo y hacemos los ajustes necesarios.</p>
+          </div>
+          <div class="paso">
+            <h3>Entregamos y documentamos</h3>
+            <p>Recibes la solución funcionando, con documentación para que puedas usarla con confianza.</p>
+          </div>
+        </div>
+
+        <div class="principio">
+          <span class="punto"></span>
+          <div>
+            <strong>Solo proponemos lo que aporta valor a tu negocio.</strong><br>
+            <span>Si una herramienta no resuelve tu problema, no la incluimos.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. SOBRE ZIRENA -->
+    <section class="seccion-blanca" id="sobre">
+      <div class="contenedor sobre-grid">
+        <div class="sobre-texto">
+          <span class="etiqueta" style="color: var(--petroleo)">Sobre ZIRENA</span>
+          <h2 style="margin-bottom: 22px;">Análisis, criterio y cercanía.</h2>
+          <p>ZIRENA es una consultoría tecnológica que nace para acercar el análisis de datos, la automatización y la inteligencia artificial a negocios que no cuentan con un equipo técnico.</p>
+          <p>Creemos que la tecnología vale cuando resuelve un problema real. Por eso escuchamos primero, explicamos con palabras simples y construimos soluciones que tu equipo pueda usar.</p>
+        </div>
+
+        <div class="valores">
+          <div class="valor">
+            <h3>Criterio</h3>
+            <p>Analizamos antes de proponer, y recomendamos solo lo que tiene sentido para tu negocio.</p>
+          </div>
+          <div class="valor">
+            <h3>Innovación con propósito</h3>
+            <p>Usamos datos, automatización e IA para resolver necesidades concretas.</p>
+          </div>
+          <div class="valor">
+            <h3>Cercanía profesional</h3>
+            <p>Comunicación clara, sin tecnicismos innecesarios y con soluciones accesibles.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. CONTACTO -->
+    <section class="seccion-oscura contacto" id="contacto">
+      <div class="contenedor">
+        <span class="etiqueta">Contacto</span>
+        <h2>Cuéntanos qué quieres ordenar, automatizar o entender mejor.</h2>
+        <p>Escríbenos con una breve descripción de tu situación y te responderemos con los siguientes pasos.</p>
+        <div class="hero-acciones">
+          <!-- CAMBIAR: reemplaza tucorreo@ejemplo.com por tu correo real -->
+          <a href="mailto:tucorreo@ejemplo.com?subject=Consulta%20desde%20la%20web%20de%20ZIRENA" class="btn btn-primario">Escríbenos por correo</a>
+          <!-- CAMBIAR: reemplaza 56900000000 por tu número con código de país, sin + ni espacios -->
+          <a href="https://wa.me/56900000000" class="btn btn-secundario" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+        <small>Primera conversación sin costo.</small>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contenedor foot-in">
+      <div>
+        <a href="#inicio" class="logo" aria-label="ZIRENA, volver al inicio">ZIREN<span class="a">A</span></a>
+        <p class="foot-desc">Consultoría tecnológica</p>
+        <p class="lema">Transformamos la manera de trabajar.</p>
+      </div>
+      <p class="legal">© <span id="anio">2026</span> ZIRENA. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Menú en celular
+    var btn = document.getElementById('menuBtn');
+    var menu = document.getElementById('menu');
+    btn.addEventListener('click', function () {
+      var abierto = menu.classList.toggle('abierto');
+      btn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+    });
+    menu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        menu.classList.remove('abierto');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+    // Año automático en el pie de página
+    document.getElementById('anio').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
